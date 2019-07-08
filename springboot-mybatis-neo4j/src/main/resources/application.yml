@@ -1,0 +1,22 @@
+#端口号
+server:
+  port: 8018
+
+spring:
+  application:
+    name: wsm-demo #服务名
+
+  datasource:
+    driver-class-name: org.neo4j.jdbc.http.HttpDriver
+    name: neo4j
+    password: root
+    url: jdbc:neo4j:http://localhost:7474
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+
+
+
+

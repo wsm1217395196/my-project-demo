@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.UserMapper">
+
+    <!-- 自定义结果集-->
+    <resultMap id="userMap" type="com.study.model.UserModel">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="sex" column="sex"/>
+        <collection property="userModels" ofType="com.study.model.UserModel">
+            <id property="id" column="id1"/>
+            <result property="name" column="name1"/>
+            <result property="age" column="age1"/>
+            <result property="sex" column="sex1"/>
+        </collection>
+    </resultMap>
+
+    <!--这里CQL语句返回的字段名必须与上面定义的结果集的字段名一致，若不一致需要重命名，否则会报空指针异常 -->
+    <select id="getPage" resultMap="userMap">
+        match (u:user)
+        <where>
+            <if test="name != null and name != ''">
+                u.name =~ #{name}
+            </if>
+            <if test="sex != null and sex != ''">
+                and u.sex = #{sex}
+            </if>
+        </where>
+        return
+        id(u) as id,u.name as name,u.age as age,u.sex as sex
+        <if test="sort != null and sort != ''">
+            order by ${sort}
+        </if>
+        <if test="pageStart >= 0 and pageSize > 0">
+            skip #{pageStart} limit #{pageSize}
+        </if>
+    </select>
+
+    <select id="getPageTotal" resultType="int">
+        match (u:user)
+        <where>
+            <if test="name != null and name != ''">
+                u.name =~ #{name}
+            </if>
+            <if test="sex != null and sex != ''">
+                and u.sex = #{sex}
+            </if>
+        </where>
+        return count(*)
+    </select>
+
+    <select id="getAll" resultMap="userMap">
+		match
+          (u:user)
+		return
+		  id(u) as id,u.name as name,u.age as age,u.sex as sex
+	</select>
+
+    <select id="getById" resultMap="userMap">
+		match
+		  (u:user)- [l:like] -> (u1:user)
+		where
+		  id(u) = #{id}
+		return
+          id(u) as id,u.name as name,u.age as age,u.sex as sex,
+          id(u1) as id1,u1.name as name1,u1.age as age1,u1.sex as sex1
+	</select>
+
+    <insert id="add">
+        create(u:user{name:#{model.name},age:#{model.age},sex:#{model.sex}})
+    </insert>
+
+    <update id="update">
+        match (u:user)
+        where id(u) = #{model.id}
+        set u.name = #{model.name},u.age = #{model.age},u.sex = #{model.sex}
+    </update>
+
+    <delete id="deleteById">
+        match (u:user) where id(u) = #{id} delete u
+    </delete>
+</mapper>
