@@ -67,6 +67,7 @@
           id(u1) as id1,u1.name as name1,u1.age as age1,u1.sex as sex1
 	</select>
 
+    <!--create(u:user{name:'aaa'}) - [l:like] -> (u1:user{name:'bbb'}) - [l1:like] -> (u2:user{name:'ccc'})-->
     <insert id="add">
         create(u:user{name:#{model.name},age:#{model.age},sex:#{model.sex}})
     </insert>

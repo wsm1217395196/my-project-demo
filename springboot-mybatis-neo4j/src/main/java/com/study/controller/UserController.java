@@ -48,6 +48,12 @@ public class UserController {
         return models;
     }
 
+    /**
+     * 根据id查询（含节点关系）
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/getById/{id}")
     public UserModel getById(@PathVariable Long id) {
         UserModel model = userMapper.getById(id);

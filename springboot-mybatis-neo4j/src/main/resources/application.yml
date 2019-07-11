@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: wsm-demo #服务名
+    name: springboot-mybatis-neo4j #服务名
 
   datasource:
     driver-class-name: org.neo4j.jdbc.http.HttpDriver
