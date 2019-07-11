@@ -1,0 +1,19 @@
+#端口号
+server:
+  port: 8888
+
+spring:
+  application:
+    name: wsm-demo #服务名
+
+#neo4j配置
+  data:
+    neo4j:
+      username: neo4j
+      password: root
+      uri: bolt://localhost:7687
+
+
+
+
+
