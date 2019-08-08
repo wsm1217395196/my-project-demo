@@ -1,0 +1,21 @@
+#端口号
+server:
+  port: 8888
+
+spring:
+  application:
+    name: wsm-demo #服务名
+
+rocketmq:
+  producer:
+    groupName: test-rocketmq
+    namesrvAddr: 127.0.0.1:9876
+    default: false
+
+
+
+
+
+
+
+
