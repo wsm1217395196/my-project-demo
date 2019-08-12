@@ -18,21 +18,6 @@ import java.util.List;
 @Configuration
 public class ConsumerConfig {
 
-    public void defaultMQPushConsumer1() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(JmsConfig.consumerName);
-        consumer.setNamesrvAddr(JmsConfig.namesrvAddr);
-        consumer.subscribe(JmsConfig.topic, "*");
-        consumer.registerMessageListener(new MessageListenerConcurrently() {
-            @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                System.out.printf("%s 接收消息: %s %n", Thread.currentThread().getName(), msgs);
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-            }
-        });
-        consumer.start();
-        System.out.printf("Consumer Started.%n");
-    }
-
     public DefaultMQPushConsumer defaultMQPushConsumer() throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(JmsConfig.consumerName);
         consumer.setNamesrvAddr(JmsConfig.namesrvAddr);
@@ -60,5 +45,33 @@ public class ConsumerConfig {
         });
         consumer.start();
         return consumer;
+    }
+
+    /**
+     * 消费消息
+     *
+     * @throws Exception
+     */
+    public void defaultMQPushConsumer1() throws Exception {
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(JmsConfig.consumerName);
+        consumer.setNamesrvAddr(JmsConfig.namesrvAddr);
+        //订阅主题和 标签（ * 代表所有标签)下信息
+        consumer.subscribe(JmsConfig.topic, "*");
+//        consumer.setVipChannelEnabled(false);
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
+            @Override
+            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+                for (MessageExt msg : msgs) {
+                    try {
+                        System.err.println(JmsConfig.consumerName + "消费消息:" + new String(msg.getBody(), "utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            }
+        });
+        consumer.start();
+        System.err.println("Consumer 开启:");
     }
 }
