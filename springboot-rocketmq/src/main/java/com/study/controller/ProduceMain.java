@@ -10,6 +10,5 @@ public class ProduceMain {
 
         //同步生产消息
         producer.defaultMQProducer1();
-
     }
 }
