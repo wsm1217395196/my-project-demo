@@ -1,0 +1,23 @@
+#端口号
+server:
+  port: 8888
+
+spring:
+  application:
+    name: wsm-demo #服务名
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#    端口默认就是5672可以不写
+#    用户名和密码没改默认就是guest可以不写
+
+
+
+
+
+
+
+
