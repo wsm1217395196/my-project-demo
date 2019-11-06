@@ -1,0 +1,22 @@
+#端口号
+server:
+  port: 8888
+
+spring:
+  application:
+    name: wsm-demo #服务名
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    template:
+      default-topic: topic # 指定默认topic id
+    consumer:
+      group-id: myGroup # 指定默认消费者group id
+
+
+
+
+
+
+
+
