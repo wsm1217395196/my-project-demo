@@ -1,29 +1,32 @@
 package com.study.result;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 /**
- * 结果视图类
+ * 通用结果视图类
  */
+@Data
+@ApiModel(value = "ResultView对象", description = "通用结果视图类")
 public class ResultView {
     /**
      * 状态码
      */
+    @ApiModelProperty(value = "状态码")
     private Integer code;
 
     /**
      * 消息
      */
+    @ApiModelProperty(value = "消息")
     private String msg;
 
     /**
      * 数据
      */
+    @ApiModelProperty(value = "数据")
     private Object data;
-
-//    /**
-//     * 时间
-//     */
-//    @ApiModelProperty(name = "time", value = "时间", example = "1541486801195")
-//    private long time;
 
     /**
      * 成功
@@ -42,6 +45,15 @@ public class ResultView {
      */
     public static ResultView success(Object data) {
         return new ResultView(data);
+    }
+
+    /**
+     * 错误
+     *
+     * @return 结果视图
+     */
+    public static ResultView error() {
+        return new ResultView(ResultEnum.CODE_2.getCode(), ResultEnum.CODE_2.getMsg());
     }
 
     /**
@@ -73,36 +85,11 @@ public class ResultView {
         this.data = data;
         this.code = ResultEnum.CODE_1.getCode();
         this.msg = ResultEnum.CODE_1.getMsg();
-//        this.time = System.currentTimeMillis();
     }
 
     private ResultView(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
-//        this.time = System.currentTimeMillis();
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 }
