@@ -2,16 +2,12 @@ package com.study.exception;
 
 import com.study.result.ResultEnum;
 import com.study.result.ResultView;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**
  * 自定义运行时异常
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class MyRuntimeException extends RuntimeException {
 
     private ResultView resultView;

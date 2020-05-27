@@ -2,18 +2,14 @@ package com.study.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.util.List;
 
 /**
  * 分页结果
  */
-@Getter
-@Setter
-@ToString
+@Data
 @ApiModel(value = "PageResult对象", description = "分页结果")
 public class PageResult {
 

@@ -2,16 +2,12 @@ package com.study.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**
  * 分页参数类
  */
-@Getter
-@Setter
-@ToString
+@Data
 @ApiModel(value = "PageParam对象", description = "分页参数类")
 public class PageParam {
     /**
