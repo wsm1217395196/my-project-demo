@@ -2,16 +2,20 @@ package com.study.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
 /**
  * 分页结果
  */
-@Data
+@Getter
+@Setter
+@ToString
 @ApiModel(value = "PageResult对象", description = "分页结果")
-public class PageResult {
+public class PageResult<T> {
 
     /**
      * 要查第几页？
@@ -37,12 +41,12 @@ public class PageResult {
      * 记录
      */
     @ApiModelProperty(value = "记录")
-    private List records;
+    private List<T> records;
 
     public PageResult() {
     }
 
-    public PageResult(Integer pageIndex, Integer pageSize, Integer total, List records) {
+    public PageResult(Integer pageIndex, Integer pageSize, Integer total, List<T> records) {
         this.pageIndex = pageIndex;
         this.pageSize = pageSize;
         this.total = total;

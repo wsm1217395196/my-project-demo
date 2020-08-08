@@ -2,14 +2,18 @@ package com.study.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 分页参数类
  */
-@Data
+@Getter
+@Setter
+@ToString
 @ApiModel(value = "PageParam对象", description = "分页参数类")
-public class PageParam {
+public class PageParam<T> {
     /**
      * 要查第几页？
      */
@@ -36,14 +40,22 @@ public class PageParam {
     @ApiModelProperty(value = "条件(json格式：\"{'name':'wsm','isEnable':'1'}\")")
     private String condition;
 
+    /**
+     * 条件
+     */
+    @ApiModelProperty(value = "条件")
+    private T objectCondition;
+
     public PageParam() {
     }
 
-    public PageParam(int pageIndex, int pageSize, String sort, String condition) {
+    public PageParam(int pageIndex, int pageSize, String sqlColumns, String sort, String condition, T objectCondition) {
         this.pageIndex = pageIndex;
         this.pageSize = pageSize;
+        this.sqlColumns = sqlColumns;
         this.sort = sort;
         this.condition = condition;
+        this.objectCondition = objectCondition;
     }
 
     public int getPageStart() {
