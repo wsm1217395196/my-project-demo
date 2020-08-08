@@ -1,0 +1,28 @@
+package rules
+
+import com.study.model.TestModel
+import org.springframework.util.StringUtils
+
+rule "rule-name"
+
+    when $t:TestModel(StringUtils.isEmpty(name) == true)
+
+    then $t.println("name");
+
+end
+
+rule "rule-age"
+
+    when $t:TestModel(StringUtils.isEmpty(age) == true)
+
+    then $t.println("age");
+
+end
+
+rule "rule-sex"
+
+    when $t:TestModel(StringUtils.isEmpty(sex) == true)
+
+    then $t.println("sex");
+
+end
