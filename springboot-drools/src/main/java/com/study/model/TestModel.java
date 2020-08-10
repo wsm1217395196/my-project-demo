@@ -12,7 +12,7 @@ public class TestModel {
     private Integer sex;
 
     public void println(String property) {
-        System.err.println(property + "属性 :名中了规则");
+        System.err.println(property + "属性：名中了规则");
     }
 
     public TestModel(String name, Integer age, Integer sex) {
