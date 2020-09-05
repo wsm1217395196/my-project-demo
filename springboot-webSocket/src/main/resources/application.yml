@@ -1,0 +1,17 @@
+#端口号
+server:
+  port: 8888
+
+spring:
+  application:
+    name: wsm-demo #服务名
+
+  resources:
+    static-locations: classpath:/html.webSocket
+
+
+
+
+
+
+
