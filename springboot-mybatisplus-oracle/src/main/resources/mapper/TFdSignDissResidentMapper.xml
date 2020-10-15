@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.TFdSignDissResidentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.model.TFdSignDissResidentModel">
+        <result column="ID" property="id"/>
+        <result column="REORT_ID" property="reortId"/>
+        <result column="ORG_CODE" property="orgCode"/>
+        <result column="TEAM_ID" property="teamId"/>
+        <result column="PATIENT_ID" property="patientId"/>
+        <result column="IDCARD" property="idcard"/>
+        <result column="NAME" property="name"/>
+        <result column="SEX" property="sex"/>
+        <result column="AGE" property="age"/>
+        <result column="TEL" property="tel"/>
+        <result column="ADDRESS" property="address"/>
+        <result column="CROWD_TYPE" property="crowdType"/>
+        <result column="RESIDENT_TYPE" property="residentType"/>
+        <result column="DISS_REASON" property="dissReason"/>
+        <result column="DISS_TIME" property="dissTime"/>
+        <result column="OPERATOR" property="operator"/>
+        <result column="OPERATOR_TIME" property="operatorTime"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="CREATE_BY" property="createBy"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, REORT_ID, ORG_CODE, TEAM_ID, PATIENT_ID, IDCARD, NAME, SEX, AGE, TEL, ADDRESS, CROWD_TYPE, RESIDENT_TYPE, DISS_REASON, DISS_TIME, OPERATOR, OPERATOR_TIME, CREATE_TIME, CREATE_BY
+    </sql>
+
+    <select id="findReportResidentPage" parameterType="map" resultType="com.study.model.FindReportResidentPageVo">
+        SELECT
+            t1.id,
+            t2.org_name,
+            t3.team_name,
+            t1.name,
+            t1.sex,
+            t1.age,
+            t1.crowd_type,
+            t1.resident_type,
+            t1.tel,
+            t1.address,
+            t1.diss_reason,
+            t1.operator,
+            t1.operator_time
+        FROM
+            T_FD_SIGN_DISS_RESIDENT t1,
+            T_ORG t2,
+            T_FD_TEAM t3
+        WHERE
+            t1.ORG_CODE = t2.ORG_CODE
+            AND t1.TEAM_ID = t3.TEAM_ID
+            AND t1.REORT_ID = #{req.reportId}
+            <if test="req.orgCode != null and req.orgCode != ''">
+                AND t1.ORG_CODE = #{req.orgCode}
+            </if>
+            <if test="req.teamId != null and req.teamId != ''">
+                AND t1.TEAM_ID = #{req.teamId}
+            </if>
+    </select>
+
+</mapper>

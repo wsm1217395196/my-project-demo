@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.TFdSignDissReportMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.model.TFdSignDissReportModel">
+        <result column="ID" property="id"/>
+        <result column="TASK_ID" property="taskId"/>
+        <result column="ORG_CODE" property="orgCode"/>
+        <result column="SIGN_NUM" property="signNum"/>
+        <result column="DISS_NUM" property="dissNum"/>
+        <result column="UNSIGN_NUM" property="unsignNum"/>
+        <result column="OUT_REGION_NUM" property="outRegionNum"/>
+        <result column="LOSE_CONT_NUM" property="loseContNum"/>
+        <result column="REFUSED_CONT_NUM" property="refusedContNum"/>
+        <result column="PERSON_DISS_NUM" property="personDissNum"/>
+        <result column="OUT_FILES_NUM" property="outFilesNum"/>
+        <result column="EXPIRE_NUM" property="expireNum"/>
+        <result column="OTHER_NUM" property="otherNum"/>
+        <result column="AUDIT_STATE" property="auditState"/>
+        <result column="PARENT_AUDIT_STATE" property="parentAuditState"/>
+        <result column="CREATE_BY" property="createBy"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="AUDIT_BY" property="auditBy"/>
+        <result column="AUDIT_TIME" property="auditTime"/>
+        <result column="PARENT_AUDIT_BY" property="parentAuditBy"/>
+        <result column="PARENT_AUDIT_TIME" property="parentAuditTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, TASK_ID, ORG_CODE, SIGN_NUM, DISS_NUM, UNSIGN_NUM, OUT_REGION_NUM, LOSE_CONT_NUM, REFUSED_CONT_NUM, PERSON_DISS_NUM, OUT_FILES_NUM, EXPIRE_NUM, OTHER_NUM, AUDIT_STATE, PARENT_AUDIT_STATE, CREATE_BY, CREATE_TIME, AUDIT_BY, AUDIT_TIME, PARENT_AUDIT_BY, PARENT_AUDIT_TIME
+    </sql>
+    <select id="getPage" resultType="com.study.model.TFdSignDissReportModel">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM T_FD_SIGN_DISS_REPORT WHERE ORG_CODE = #{corCode}
+    </select>
+
+</mapper>
