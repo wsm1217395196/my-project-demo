@@ -1,0 +1,39 @@
+#端口号
+server:
+  port: 8866
+
+spring:
+  application:
+    name: springboot-activiti #服务名
+  # mysql配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+    url: jdbc:mysql://localhost:3306/activiti?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+
+#  activiti:
+#    # 自动建表
+#    database-schema: ACTIVITI
+#    database-schema-update: true
+#    history-level: full
+#    db-history-used: true
+  activiti:
+    check-process-definitions: false
+    database-schema-update: true
+    db-history-used: true
+    history-level: full
+
+# 配置mybatis-plus
+mybatis-plus:
+  # 配置扫描xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.study.model
+
+
+
+
+
+
+
